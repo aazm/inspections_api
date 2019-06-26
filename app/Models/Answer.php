@@ -13,7 +13,12 @@ class Answer
 
     public function score(): int
     {
-        return $this->params['score'];
+        return (int) $this->params['score'];
+    }
+
+    public function undetermined(): bool
+    {
+        return is_null($this->params['score']);
     }
 
     public function toArray(): array

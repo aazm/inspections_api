@@ -25,7 +25,31 @@ class AnswerTest extends TestCase
         $this->assertEquals($given['score'], $answer->score());
     }
 
+    public function testNullScoreReturnUndeterminedAnswerTrue()
+    {
+        $given = factory(Answer::class)->make()->toArray();
+        $given['score'] = null;
+        $answer = new Answer($given);
 
+        $this->assertTrue($answer->undetermined());
 
+    }
+
+    public function testNotNullScoreReturnUndeterminedAnswerFalse()
+    {
+        $given = factory(Answer::class)->make()->toArray();
+        $answer = new Answer($given);
+        $this->assertFalse($answer->undetermined());
+    }
+
+    public function testNullScoreReturnsAsZeroScore()
+    {
+        $given = factory(Answer::class)->make()->toArray();
+        $given['score'] = null;
+        $answer = new Answer($given);
+
+        $this->assertEquals(0, $answer->score());
+
+    }
 
 }
