@@ -12,3 +12,5 @@ Unknown data: check_conditions_for, categories.
 so, I'm unable to assume more elegant class hierarchy which would be more suitable for the rest system components. 
 
 
+3. As all entities has Uuid values, I suppose they were persistent in some storage.
+But I will ignore that and will create model classes without Eloquent support
