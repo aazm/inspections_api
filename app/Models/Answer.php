@@ -11,6 +11,11 @@ class Answer
         $this->params = $params;
     }
 
+    public function score(): int
+    {
+        return $this->params['score'];
+    }
+
     public function toArray(): array
     {
         return $this->params;
