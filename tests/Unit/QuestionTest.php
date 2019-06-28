@@ -7,27 +7,28 @@ use Tests\TestCase;
 
 class QuestionTest extends TestCase
 {
-    public function testQuestionToArrayReturnsIndexes()
-    {
-        $question = $this->createQuestion();
-
-        $this->assertArrayHasKey('params', $question->toArray());
-        $this->assertArrayHasKey('answers', $question->toArray());
-    }
 
     public function testQuestionToArrayReturnsSameData()
     {
-        ['params' => $params, 'answers' => $answers] = $this->createQuestion()->toArray();
+        [$params, $answers] = $this->createQuestion()->toArray();
 
         $question = new Question($params, $answers);
 
-        $this->assertEquals(compact('params', 'answers'), $question->toArray());
+        $this->assertEquals([$params, $answers], $question->toArray());
     }
 
     public function testQuestionTotalEqualsAnswersSum()
     {
-        $question = $this->createQuestion(false, true, 3);
-        
+        $question = $this->createQuestion();
+        [, $answers] = $question->toArray();
+
+        $total = 0;
+        $answers->each(function($answer) use(&$total) {
+            $total += $answer->score();
+        });
+
+        $this->assertEquals($total, $question->total());
+
     }
 
 

@@ -20,20 +20,23 @@ class Question implements Scoreable
 
     public function toArray(): array
     {
-        $params = $this->params;
-        $answers = $this->answers;
-
-        return compact('params', 'answers');
+        return [$this->params, $this->answers];
     }
 
     public function actual()
     {
-        // TODO: Implement actual() method.
+
     }
 
     public function total()
     {
-        // TODO: Implement total() method.
+        $total = 0;
+
+        $this->answers->each(function ($answer) use (&$total) {
+            $total += $answer->score();
+        });
+
+        return $total;
     }
 
 }
