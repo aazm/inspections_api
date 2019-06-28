@@ -11,13 +11,14 @@ class Question implements Scoreable
     private $params;
     /** @var Collection $answers */
     private $answers;
-    /** @var int $actual */
-    private $actual;
+    /** @var Collection $selected */
+    private $selected;
 
     public function __construct(array $params, Collection $answers)
     {
         $this->params = $params;
         $this->answers = $answers;
+        $this->selected = $this->selected();
     }
 
     public function toArray(): array
@@ -25,24 +26,32 @@ class Question implements Scoreable
         return [$this->params, $this->answers];
     }
 
-    public function multipleSelectionAllowed(): bool
+    public function isMultiple(): bool
     {
-        return (bool) $this->params['params']['multiple_selection'];
+        return (bool)$this->params['params']['multiple_selection'];
     }
 
     public function actual()
     {
-
+        return $this->selected->map(function ($answer) {
+            return $answer->score();
+        })->sum();
     }
 
     public function total()
     {
-        return $this->multipleSelectionAllowed() ? $this->answersSum() : $this->answersMax();
+        if ($this->selected->filter(function ($answer) {
+                return !$answer->undetermined();
+            })->count() == 0) return 0;
+
+        return $this->isMultiple() ? $this->answersSum() : $this->answersMax();
     }
 
     private function answersMax()
     {
-        return $this->answers->map(function ($answer) { return $answer->score(); })->max();
+        return $this->answers->map(function ($answer) {
+            return $answer->score();
+        })->max();
     }
 
     private function answersSum()
@@ -54,7 +63,15 @@ class Question implements Scoreable
         });
 
         return $total;
+    }
 
+    private function selected()
+    {
+        $ids = $this->params['response'];
+
+        return $this->answers->filter(function ($answer) use ($ids) {
+            return in_array($answer->uuid(), $ids);
+        });
     }
 
 }

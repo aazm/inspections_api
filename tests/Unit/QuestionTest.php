@@ -8,7 +8,7 @@ use Tests\TestCase;
 class QuestionTest extends TestCase
 {
 
-    public function testQuestionToArrayReturnsSameData()
+    public function testToArrayReturnsSameData()
     {
         [$params, $answers] = $this->createQuestion()->toArray();
 
@@ -17,13 +17,13 @@ class QuestionTest extends TestCase
         $this->assertEquals([$params, $answers], $question->toArray());
     }
 
-    public function testQuestionMultipleSelectionEqualsGivenFalse()
+    public function testMultipleSelectionEqualsGivenFalse()
     {
         $question = $this->createQuestion(false);
-        $this->assertFalse($question->multipleSelectionAllowed());
+        $this->assertFalse($question->isMultiple());
     }
 
-    public function testQuestionTotalEqualsAnswersSumForMultipleSelection()
+    public function testTotalEqualsAnswersSumForMultipleSelection()
     {
         $question = $this->createQuestion(true);
         [, $answers] = $question->toArray();
@@ -37,7 +37,7 @@ class QuestionTest extends TestCase
         $this->assertEquals($total, $question->total());
     }
 
-    public function testQuestionTotalEqualsMaxAnswerValueForSingleSelection()
+    public function testTotalEqualsMaxAnswerValueForSingleSelection()
     {
         $question = $this->createQuestion();
         [, $answers] = $question->toArray();
@@ -46,12 +46,9 @@ class QuestionTest extends TestCase
 
         $this->assertEquals($max, $question->total());
 
-
-
     }
 
-/*
-    public function testQuestionActualEqualsGivenValue()
+    public function testSingleSelectionActualEqualsGivenValue()
     {
         $question = $this->createQuestion();
         [$params, $answers] = $question->toArray();
@@ -60,8 +57,27 @@ class QuestionTest extends TestCase
             return $answer->uuid() == $params['response'][0];
         })->first();
 
-
         $this->assertEquals($given->score(), $question->actual());
+    }
+
+    /*
+    public function testMultipleSelectionActualEqualsGivenValue()
+    {
+        
+    }
+
+    public function testSingleSelectionUndeterminesReturnsZeroTotal()
+    {
+
+    }
+
+    public function testMultipleSelectionUndeterminesReturnsZeroTotal()
+    {
+
+    }
+
+    public function testAnswerNotFromSetThrowsException()
+    {
 
     }
 */

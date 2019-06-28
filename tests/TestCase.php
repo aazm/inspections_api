@@ -38,7 +38,11 @@ abstract class TestCase extends BaseTestCase
     public function createQuestion(bool $multiple = false, bool $required = true, $answersTotal = 10): Question
     {
         $answers = $this->createAnswersCollection($answersTotal);
-        $answer = $answers->random();
+
+        $responses = $answers
+            ->random(1 + $multiple)
+            ->map(function($answer){ return $answer->uuid(); })
+            ->toArray();
 
         return new Question([
             'type' => 'question',
@@ -52,7 +56,7 @@ abstract class TestCase extends BaseTestCase
             'check_conditions_for' => [],
             'categories' => [],
             'uuid' => $this->faker->uuid,
-            'response' => [ $answer->uuid()],
+            'response' => $responses,
             'responded' => true,
 
         ], $answers);
