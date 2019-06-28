@@ -11,6 +11,11 @@ class Answer
         $this->params = $params;
     }
 
+    public function uuid(): string
+    {
+        return $this->params['uuid'];
+    }
+
     public function score(): int
     {
         return (int) $this->params['score'];

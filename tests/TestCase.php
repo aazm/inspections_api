@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
@@ -32,6 +33,29 @@ abstract class TestCase extends BaseTestCase
         }
 
         return $collection;
+    }
+
+    public function createQuestion(bool $multiple = false, bool $required = true, $answersTotal = 10): Question
+    {
+        $answers = $this->createAnswersCollection($answersTotal);
+        $answer = $answers->random();
+
+        return new Question([
+            'type' => 'question',
+            'title' => $this->faker->sentence(),
+            'required' => $required,
+            'response_type' => 'list',
+            'params' => [
+                'response_set' => $this->faker->uuid,
+                'multiple_selection' => $multiple
+            ],
+            'check_conditions_for' => [],
+            'categories' => [],
+            'uuid' => $this->faker->uuid,
+            'response' => [ $answer->uuid()],
+            'responded' => true,
+
+        ], $answers);
     }
 
 }

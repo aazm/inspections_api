@@ -4,15 +4,12 @@ namespace Tests\Unit;
 
 use App\Models\Question;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class QuestionTest extends TestCase
 {
     public function testQuestionToArrayReturnsIndexes()
     {
-        $params = range('a','z');
-        $question = new Question($params, $answers = collect(1,2));
+        $question = $this->createQuestion();
 
         $this->assertArrayHasKey('params', $question->toArray());
         $this->assertArrayHasKey('answers', $question->toArray());
@@ -20,12 +17,18 @@ class QuestionTest extends TestCase
 
     public function testQuestionToArrayReturnsSameData()
     {
-        $params = range('a','z');
-        $question = new Question($params, $answers = collect(1,2));
+        ['params' => $params, 'answers' => $answers] = $this->createQuestion()->toArray();
+
+        $question = new Question($params, $answers);
 
         $this->assertEquals(compact('params', 'answers'), $question->toArray());
     }
 
+    public function testQuestionTotalEqualsAnswersSum()
+    {
+        $question = $this->createQuestion(false, true, 3);
+        
+    }
 
 
 }
