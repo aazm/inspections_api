@@ -11,6 +11,8 @@ class Question implements Scoreable
     private $params;
     /** @var Collection $answers */
     private $answers;
+    /** @var int $actual */
+    private $actual;
 
     public function __construct(array $params, Collection $answers)
     {
@@ -23,12 +25,27 @@ class Question implements Scoreable
         return [$this->params, $this->answers];
     }
 
+    public function multipleSelectionAllowed(): bool
+    {
+        return (bool) $this->params['params']['multiple_selection'];
+    }
+
     public function actual()
     {
 
     }
 
     public function total()
+    {
+        return $this->multipleSelectionAllowed() ? $this->answersSum() : $this->answersMax();
+    }
+
+    private function answersMax()
+    {
+        return $this->answers->map(function ($answer) { return $answer->score(); })->max();
+    }
+
+    private function answersSum()
     {
         $total = 0;
 
@@ -37,6 +54,7 @@ class Question implements Scoreable
         });
 
         return $total;
+
     }
 
 }
