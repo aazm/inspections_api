@@ -60,12 +60,22 @@ class QuestionTest extends TestCase
         $this->assertEquals($given->score(), $question->actual());
     }
 
-    /*
     public function testMultipleSelectionActualEqualsGivenValue()
     {
-        
+        $question = $this->createQuestion(true);
+        [$params, $answers] = $question->toArray();
+
+        $ids = $params['response'];
+
+        $actual = $answers->filter(function ($answer) use ($ids) {
+            return in_array($answer->uuid(), $ids);
+        })->map(function ($answer) { return $answer->score(); })->sum();
+
+        $this->assertEquals($actual, $question->actual());
+
     }
 
+    /*
     public function testSingleSelectionUndeterminesReturnsZeroTotal()
     {
 
