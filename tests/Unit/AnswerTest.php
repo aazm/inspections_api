@@ -19,7 +19,7 @@ class AnswerTest extends TestCase
 
     public function testScoreTheSameAsGiven()
     {
-        $given = factory(Answer::class)->make()->toArray();
+        $given = $this->createAnswer()->toArray();
         $answer = new Answer($given);
 
         $this->assertEquals($given['score'], $answer->score());
@@ -27,8 +27,7 @@ class AnswerTest extends TestCase
 
     public function testNullScoreReturnUndeterminedAnswerTrue()
     {
-        $given = factory(Answer::class)->make()->toArray();
-        $given['score'] = null;
+        $given = $this->createAnswer(true)->toArray();
         $answer = new Answer($given);
 
         $this->assertTrue($answer->undetermined());
@@ -37,15 +36,14 @@ class AnswerTest extends TestCase
 
     public function testNotNullScoreReturnUndeterminedAnswerFalse()
     {
-        $given = factory(Answer::class)->make()->toArray();
+        $given = $this->createAnswer()->toArray();
         $answer = new Answer($given);
         $this->assertFalse($answer->undetermined());
     }
 
     public function testNullScoreReturnsAsZeroScore()
     {
-        $given = factory(Answer::class)->make()->toArray();
-        $given['score'] = null;
+        $given = $this->createAnswer(true)->toArray();
         $answer = new Answer($given);
 
         $this->assertEquals(0, $answer->score());
