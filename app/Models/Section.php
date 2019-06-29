@@ -29,7 +29,7 @@ class Section implements Scoreable, Containable
         $this->weight = $params['weight'] ?? 1;
     }
 
-    public function add(Scoreable $obj)
+    public function add(Scoreable $obj): void
     {
         $this->items->add($obj);
     }

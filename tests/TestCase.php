@@ -3,6 +3,7 @@
 namespace Tests;
 
 use App\Models\Answer;
+use App\Models\Page;
 use App\Models\Question;
 use App\Models\Section;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
@@ -79,11 +80,20 @@ abstract class TestCase extends BaseTestCase
         return new Section([
             'type' => 'section',
             'title' => $this->faker->sentence(),
-            'required' => (bool) rand(0,1),
-            'weight' => $weight ?? rand(1,10),
-            'repeat' =>  (bool) rand(0,1),
+            'required' => (bool)rand(0, 1),
+            'weight' => $weight ?? rand(1, 10),
+            'repeat' => (bool)rand(0, 1),
             'uuid' => $this->faker->uuid
 
+        ]);
+    }
+
+    protected function createSimplePage(): Page
+    {
+        return new Page([
+            'uuid' => $this->faker->uuid,
+            'type' => 'page',
+            'title' => $this->faker->sentence(),
         ]);
     }
 

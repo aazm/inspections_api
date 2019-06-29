@@ -12,7 +12,17 @@ use Illuminate\Support\Collection;
 
 interface Containable
 {
-    public function add(Scoreable $obj);
+    /**
+     * Add item inside.
+     *
+     * @param Scoreable $obj
+     */
+    public function add(Scoreable $obj): void;
 
+    /**
+     * Get Collection of all added objects.
+     *
+     * @return Collection
+     */
     public function all(): Collection;
 }
