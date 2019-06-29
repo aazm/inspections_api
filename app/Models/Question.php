@@ -19,6 +19,13 @@ class Question implements Scoreable
         $this->params = $params;
         $this->answers = $answers;
         $this->selected = $this->selected();
+
+        $this->checkQuestionState();
+    }
+
+    private function checkQuestionState()
+    {
+        if(!$this->selected->count()) throw new \RuntimeException('Not found selected results in answers collection');
     }
 
     public function toArray(): array

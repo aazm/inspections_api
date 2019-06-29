@@ -30,7 +30,7 @@ class QuestionTest extends TestCase
 
         $total = 0;
 
-        $answers->each(function($answer) use(&$total) {
+        $answers->each(function ($answer) use (&$total) {
             $total += $answer->score();
         });
 
@@ -42,7 +42,9 @@ class QuestionTest extends TestCase
         $question = $this->createQuestion(false);
         [, $answers] = $question->toArray();
 
-        $max = $answers->map(function ($answer) { return $answer->score(); })->max();
+        $max = $answers->map(function ($answer) {
+            return $answer->score();
+        })->max();
 
         $this->assertEquals($max, $question->total());
 
@@ -53,7 +55,7 @@ class QuestionTest extends TestCase
         $question = $this->createQuestion();
         [$params, $answers] = $question->toArray();
 
-        $given = $answers->filter(function($answer) use($params) {
+        $given = $answers->filter(function ($answer) use ($params) {
             return $answer->uuid() == $params['response'][0];
         })->first();
 
@@ -69,7 +71,9 @@ class QuestionTest extends TestCase
 
         $actual = $answers->filter(function ($answer) use ($ids) {
             return in_array($answer->uuid(), $ids);
-        })->map(function ($answer) { return $answer->score(); })->sum();
+        })->map(function ($answer) {
+            return $answer->score();
+        })->sum();
 
         $this->assertEquals($actual, $question->actual());
 
@@ -128,21 +132,18 @@ class QuestionTest extends TestCase
 
     }
 
+    public function testAnswerNotFromSetThrowsException()
+    {
+        [$qdata, $answers] = $this->createQuestionData(false, true, 10);
+        $answer = $this->createAnswer();
 
+        $qdata['response'] = [$answer->uuid()];
 
-    /*    public function testAnswerNotFromSetThrowsException()
-        {
+        $this->expectException(\RuntimeException::class);
 
-        }
+        new Question($qdata, $answers);
 
-        public function testMultipleSelectionUndeterminedReturnsZeroTotal()
-        {
+    }
 
-        }
-
-        public function testUndeterminedReturnsZeroActual()
-        {
-
-        }*/
 
 }
