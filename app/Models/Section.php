@@ -31,20 +31,20 @@ class Section implements Scoreable, Containable
 
     public function add(Scoreable $obj)
     {
-        // TODO: Implement add() method.
+        $this->items->add($obj);
     }
 
     public function all(): Collection
     {
-        // TODO: Implement all() method.
+        return $this->items;
     }
 
-    public function total(): double
+    public function total(): float
     {
         // TODO: Implement total() method.
     }
 
-    public function actual(): double
+    public function actual(): float
     {
         // TODO: Implement actual() method.
     }

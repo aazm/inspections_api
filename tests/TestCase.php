@@ -4,6 +4,7 @@ namespace Tests;
 
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\Section;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Collection;
@@ -19,7 +20,7 @@ abstract class TestCase extends BaseTestCase
             'title' => $this->faker->sentence(),
             'color' => $this->faker->hexColor,
             'score' => $undetermined ? null : rand(0, 10),
-            'negative' => (bool) rand(0,1),
+            'negative' => (bool)rand(0, 1),
             'uuid' => $this->faker->uuid
 
         ]);
@@ -48,7 +49,9 @@ abstract class TestCase extends BaseTestCase
 
         $responses = $answers
             ->random(1 + $multiple)
-            ->map(function($answer){ return $answer->uuid(); })
+            ->map(function ($answer) {
+                return $answer->uuid();
+            })
             ->toArray();
 
         $qdata = [
@@ -69,6 +72,19 @@ abstract class TestCase extends BaseTestCase
         ];
 
         return [$qdata, $answers];
+    }
+
+    protected function createSimpleSection(): Section
+    {
+        return new Section([
+            'type' => 'section',
+            'title' => $this->faker->sentence(),
+            'required' => (bool) rand(0,1),
+            'weight' => rand(1,10),
+            'repeat' =>  (bool) rand(0,1),
+            'uuid' => $this->faker->uuid
+
+        ]);
     }
 
 }
