@@ -75,24 +75,74 @@ class QuestionTest extends TestCase
 
     }
 
-
     public function testSingleSelectionUndeterminedReturnsZeroTotal()
     {
-        
+        [$qdata, $answers] = $this->createQuestionData(false, true, 10);
+        $answers->add($undetermined = $this->createAnswer(true));
+
+        $qdata['response'] = [$undetermined->uuid()];
+        $question = new Question($qdata, $answers);
+
+
+        $this->assertEquals(0, $question->total());
+
     }
 
     public function testMultipleSelectionUndeterminedReturnsZeroTotal()
     {
+        [$qdata, $answers] = $this->createQuestionData(true, true, 10);
+        $answers->add($undetermined = $this->createAnswer(true));
+
+        $qdata['response'] = [$undetermined->uuid()];
+        $question = new Question($qdata, $answers);
+
+
+        $this->assertEquals(0, $question->total());
 
     }
 
-    public function testUndeterminedReturnsZeroActual()
+    public function testMultipleSelectionMultipleUndeterminedReturnsZeroTotal()
     {
+        [$qdata, $answers] = $this->createQuestionData(true, true, 10);
+        $answers->add($undetermined1 = $this->createAnswer(true));
+        $answers->add($undetermined2 = $this->createAnswer(true));
+
+        $qdata['response'] = [$undetermined1->uuid(), $undetermined2->uuid()];
+        $question = new Question($qdata, $answers);
+
+
+        $this->assertEquals(0, $question->total());
 
     }
 
-    public function testAnswerNotFromSetThrowsException()
+    public function testMultipleSelectionUndeterminedReturnsZeroActual()
     {
+        [$qdata, $answers] = $this->createQuestionData(true, true, 10);
+        $answers->add($undetermined = $this->createAnswer(true));
+
+        $qdata['response'] = [$undetermined->uuid()];
+        $question = new Question($qdata, $answers);
+
+
+        $this->assertEquals(0, $question->actual());
 
     }
+
+
+
+    /*    public function testAnswerNotFromSetThrowsException()
+        {
+
+        }
+
+        public function testMultipleSelectionUndeterminedReturnsZeroTotal()
+        {
+
+        }
+
+        public function testUndeterminedReturnsZeroActual()
+        {
+
+        }*/
+
 }
