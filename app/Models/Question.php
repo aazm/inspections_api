@@ -38,14 +38,14 @@ class Question implements Scoreable
         return (bool)$this->params['params']['multiple_selection'];
     }
 
-    public function actual(): double
+    public function actual(): float
     {
         return $this->selected->map(function ($answer) {
             return $answer->score();
         })->sum();
     }
 
-    public function total(): double
+    public function total(): float
     {
         if ($this->selected->filter(function ($answer) {
                 return !$answer->undetermined();

@@ -15,13 +15,13 @@ interface Scoreable
      *
      * @return float
      */
-    public function total(): double;
+    public function total(): float;
 
     /**
      * Return actual score of the object.
      *
      * @return float
      */
-    public function actual(): double;
+    public function actual(): float;
 }
 
