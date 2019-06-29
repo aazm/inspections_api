@@ -27,4 +27,22 @@ class SectionTest extends TestCase
         $this->assertTrue(in_array($question, $collection->toArray()));
     }
 
+    public function testSectionTotalMultipliedOnItsWeight()
+    {
+        $section = $this->createSimpleSection(10 );
+        $section->add($question = $this->createQuestion());
+
+        $this->assertEquals($question->total() * 10, $section->total());
+    }
+
+    public function testSectionActualMultipliedOnItsWeight()
+    {
+        $section = $this->createSimpleSection(10 );
+        $section->add($question = $this->createQuestion());
+
+        $this->assertEquals($question->actual() * 10, $section->actual());
+
+    }
+
+
 }

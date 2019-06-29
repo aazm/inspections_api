@@ -74,13 +74,13 @@ abstract class TestCase extends BaseTestCase
         return [$qdata, $answers];
     }
 
-    protected function createSimpleSection(): Section
+    protected function createSimpleSection(int $weight = null): Section
     {
         return new Section([
             'type' => 'section',
             'title' => $this->faker->sentence(),
             'required' => (bool) rand(0,1),
-            'weight' => rand(1,10),
+            'weight' => $weight ?? rand(1,10),
             'repeat' =>  (bool) rand(0,1),
             'uuid' => $this->faker->uuid
 

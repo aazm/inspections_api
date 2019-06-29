@@ -41,11 +41,21 @@ class Section implements Scoreable, Containable
 
     public function total(): float
     {
-        // TODO: Implement total() method.
+        $total = 0;
+        foreach ($this->items as $scoreable) {
+            $total += $scoreable->total();
+        }
+
+        return $this->weight * $total;
     }
 
     public function actual(): float
     {
-        // TODO: Implement actual() method.
+        $actual = 0;
+        foreach ($this->items as $scoreable) {
+            $actual += $scoreable->actual();
+        }
+
+        return $this->weight * $actual;
     }
 }
