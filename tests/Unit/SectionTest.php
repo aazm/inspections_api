@@ -44,5 +44,25 @@ class SectionTest extends TestCase
 
     }
 
+    public function testSectionTotalEqualsSumOfAllItsElems()
+    {
+        $section = $this->createSimpleSection(1);
+        $section->add($question1 = $this->createQuestion());
+        $section->add($question2 = $this->createQuestion());
+
+        $this->assertEquals($question1->total() + $question2->total(), $section->total());
+
+    }
+
+    public function testSectionActualEqualsSumOfAllItsElems()
+    {
+        $section = $this->createSimpleSection(1);
+        $section->add($question1 = $this->createQuestion());
+        $section->add($question2 = $this->createQuestion());
+
+        $this->assertEquals($question1->actual() + $question2->actual(), $section->actual());
+
+    }
+
 
 }
