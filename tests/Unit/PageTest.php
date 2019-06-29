@@ -26,4 +26,25 @@ class PageTest extends TestCase
         $collection = $page->all();
         $this->assertTrue(in_array($question, $collection->toArray()));
     }
+
+    public function testpageTotalEqualsSumOfAllItsElems()
+    {
+        $page = $this->createSimplePage();
+        $page->add($question1 = $this->createQuestion());
+        $page->add($question2 = $this->createQuestion());
+
+        $this->assertEquals($question1->total() + $question2->total(), $page->total());
+
+    }
+
+    public function testpageActualEqualsSumOfAllItsElems()
+    {
+        $page = $this->createSimplePage();
+        $page->add($question1 = $this->createQuestion());
+        $page->add($question2 = $this->createQuestion());
+
+        $this->assertEquals($question1->actual() + $question2->actual(), $page->actual());
+
+    }
+
 }

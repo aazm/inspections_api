@@ -15,9 +15,10 @@ use Illuminate\Support\Collection;
 
 class Page implements Scoreable, Containable
 {
+    /** @var array $params */
     private $params;
+    /** @var Collection $items */
     private $items;
-
 
     public function __construct(array $params)
     {
@@ -34,13 +35,25 @@ class Page implements Scoreable, Containable
     {
         $this->items->add($obj);
     }
+
     public function actual(): float
     {
-        // TODO: Implement actual() method.
+        $actual = 0;
+        foreach ($this->items as $scoreable) {
+            $actual += $scoreable->actual();
+        }
+
+        return $actual;
     }
+
     public function total(): float
     {
-        // TODO: Implement total() method.
+        $total = 0;
+        foreach ($this->items as $scoreable) {
+            $total += $scoreable->total();
+        }
+
+        return $total;
     }
 
 }
