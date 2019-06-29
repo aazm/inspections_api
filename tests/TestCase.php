@@ -37,6 +37,13 @@ abstract class TestCase extends BaseTestCase
 
     protected function createQuestion(bool $multiple = false, bool $required = true, $answersTotal = 10): Question
     {
+        [$question, $answers] = $this->createQuestionData(...func_get_args());
+        return new Question($question, $answers);
+    }
+
+    protected function createQuestionData(bool $multiple = false, bool $required = true, $answersTotal = 10): array
+    {
+
         $answers = $this->createAnswersCollection($answersTotal);
 
         $responses = $answers
@@ -44,7 +51,7 @@ abstract class TestCase extends BaseTestCase
             ->map(function($answer){ return $answer->uuid(); })
             ->toArray();
 
-        return new Question([
+        $qdata = [
             'type' => 'question',
             'title' => $this->faker->sentence(),
             'required' => $required,
@@ -59,7 +66,9 @@ abstract class TestCase extends BaseTestCase
             'response' => $responses,
             'responded' => true,
 
-        ], $answers);
+        ];
+
+        return [$qdata, $answers];
     }
 
 }
