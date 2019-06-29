@@ -17,7 +17,7 @@ class QuestionTest extends TestCase
         $this->assertEquals([$params, $answers], $question->toArray());
     }
 
-    public function testMultipleSelectionEqualsGivenFalse()
+    public function testSingleSelectionEqualsGivenFalse()
     {
         $question = $this->createQuestion(false);
         $this->assertFalse($question->isMultiple());
@@ -39,7 +39,7 @@ class QuestionTest extends TestCase
 
     public function testTotalEqualsMaxAnswerValueForSingleSelection()
     {
-        $question = $this->createQuestion();
+        $question = $this->createQuestion(false);
         [, $answers] = $question->toArray();
 
         $max = $answers->map(function ($answer) { return $answer->score(); })->max();
@@ -75,13 +75,18 @@ class QuestionTest extends TestCase
 
     }
 
-    /*
-    public function testSingleSelectionUndeterminesReturnsZeroTotal()
+
+    public function testSingleSelectionUndeterminedReturnsZeroTotal()
+    {
+        
+    }
+
+    public function testMultipleSelectionUndeterminedReturnsZeroTotal()
     {
 
     }
 
-    public function testMultipleSelectionUndeterminesReturnsZeroTotal()
+    public function testUndeterminedReturnsZeroActual()
     {
 
     }
@@ -90,6 +95,4 @@ class QuestionTest extends TestCase
     {
 
     }
-*/
-
 }

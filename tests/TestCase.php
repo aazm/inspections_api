@@ -13,7 +13,7 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use WithFaker;
 
-    public function createAnswer(bool $undetermined = false): Answer
+    protected function createAnswer(bool $undetermined = false): Answer
     {
         return new Answer([
             'title' => $this->faker->sentence(),
@@ -25,7 +25,7 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    public function createAnswersCollection(int $total, bool $undetermined = false): Collection
+    protected function createAnswersCollection(int $total, bool $undetermined = false): Collection
     {
         $collection = collect();
         for ($i = 0; $i < $total; $i++) {
@@ -35,7 +35,7 @@ abstract class TestCase extends BaseTestCase
         return $collection;
     }
 
-    public function createQuestion(bool $multiple = false, bool $required = true, $answersTotal = 10): Question
+    protected function createQuestion(bool $multiple = false, bool $required = true, $answersTotal = 10): Question
     {
         $answers = $this->createAnswersCollection($answersTotal);
 
