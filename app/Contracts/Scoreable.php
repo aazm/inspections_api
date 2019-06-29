@@ -10,8 +10,18 @@ namespace App\Contracts;
 
 interface Scoreable
 {
-    public function total();
+    /**
+     * Return total score of the object.
+     *
+     * @return float
+     */
+    public function total(): double;
 
-    public function actual();
+    /**
+     * Return actual score of the object.
+     *
+     * @return float
+     */
+    public function actual(): double;
 }
 

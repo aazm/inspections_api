@@ -23,7 +23,7 @@ class Question implements Scoreable
         $this->checkQuestionState();
     }
 
-    private function checkQuestionState()
+    private function checkQuestionState(): void
     {
         if(!$this->selected->count()) throw new \RuntimeException('Not found selected results in answers collection');
     }
@@ -38,14 +38,14 @@ class Question implements Scoreable
         return (bool)$this->params['params']['multiple_selection'];
     }
 
-    public function actual()
+    public function actual(): double
     {
         return $this->selected->map(function ($answer) {
             return $answer->score();
         })->sum();
     }
 
-    public function total()
+    public function total(): double
     {
         if ($this->selected->filter(function ($answer) {
                 return !$answer->undetermined();
