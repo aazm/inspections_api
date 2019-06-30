@@ -9,6 +9,7 @@
 namespace App\Models;
 
 use App\Contracts\Scoreable;
+use Illuminate\Support\Collection;
 
 abstract class Element implements Scoreable
 {
@@ -27,7 +28,7 @@ abstract class Element implements Scoreable
      * @param array $params
      * @return Scoreable
      */
-    public static function create(string $type, array $params): Scoreable
+    public static function create(string $type, array $params, Collection $responses = null): Scoreable
     {
         switch ($type) {
             case self::QUESTION:

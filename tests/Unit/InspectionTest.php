@@ -27,12 +27,32 @@ class InspectionTest extends TestCase
     {
         $service = new InspectionService();
         $this->assertTrue($service->fill($this->payload));
-
     }
 
-//    public function testDoubleFillingThrowsException()
-//    {
-//
-//    }
+    public function testInvalidJsonStringReturnsFalse()
+    {
+        $service = new InspectionService();
+        $this->assertFalse($service->fill("{]"));
+    }
+
+    public function testDoubleFillingThrowsException()
+    {
+        $this->expectException(\RuntimeException::class);
+
+        $service = new InspectionService();
+
+        $service->fill($this->payload);
+        $service->fill('');
+    }
+
+    public function testFillingCreatesTwoPagesForPayload1()
+    {
+        $service = new InspectionService();
+        $service->fill($this->payload);
+
+        $items = $service->getItems();
+        $this->assertEquals(2, $items->count());
+
+    }
 
 }
