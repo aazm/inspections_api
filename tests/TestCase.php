@@ -96,5 +96,4 @@ abstract class TestCase extends BaseTestCase
             'title' => $this->faker->sentence(),
         ]);
     }
-
 }

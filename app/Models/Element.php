@@ -13,16 +13,32 @@ use App\Contracts\Scoreable;
 abstract class Element implements Scoreable
 {
     private const PAGE = 'page';
-    private const SECTION = 'page';
-    private const QUESTION = 'page';
+    private const SECTION = 'section';
+    private const QUESTION = 'question';
 
     /** @var array $params */
     protected $params;
 
 
+    /**
+     * Basic factory method for Scoreable Objects.s
+     *
+     * @param string $type
+     * @param array $params
+     * @return Scoreable
+     */
     public static function create(string $type, array $params): Scoreable
     {
-        return new Question($params[0], $params[1]);
+        switch ($type) {
+            case self::QUESTION:
+                return new Question($params[0], $params[1]);
+            case self::PAGE:
+                return new Page($params);
+            case self::SECTION:
+                return new Section($params);
+            default:
+                throw new \RuntimeException("unable to instantiate unknown class: {$type}");
+        }
     }
 
     /**
