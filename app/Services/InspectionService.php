@@ -55,12 +55,8 @@ class InspectionService
         $actual = 0;
 
         foreach ($this->items as $item) {
-
             $total += $item->total();
             $actual += $item->actual();
-
-
-            print_r($item);
         }
 
         if(!$total) {
