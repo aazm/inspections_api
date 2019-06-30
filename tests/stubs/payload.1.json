@@ -1,0 +1,328 @@
+{
+  "uuid": "4da0837e-b437-4d65-968c-7ab6e7652b95",
+  "type": "form",
+  "items": [
+    {
+      "uuid": "0affe868-2573-43c9-aab1-70652c597895",
+      "type": "page",
+      "title": "Health",
+      "items": [
+        {
+          "uuid": "cd09e440-2cbc-4825-828a-608a51454e55",
+          "title": "How are you?",
+          "type": "question",
+          "response_type": "list",
+          "required": false,
+          "params": {
+            "response_set": "0caa8e39-d70c-4e7a-80b1-3a5c9b5d345d",
+            "multiple_selection": false
+          },
+          "check_conditions_for": [],
+          "categories": [],
+          "response": [
+            "af897582-9e72-4976-ba59-cb8cd0039854"
+          ],
+          "responded": true,
+        },
+        {
+          "type": "question",
+          "title": "Have you slept enough last night?",
+          "required": false,
+          "response_type": "list",
+          "params": {
+            "response_set": "7c45d26f-ebe6-49e4-8c1c-15b2aeac5185",
+            "multiple_selection": false
+          },
+          "check_conditions_for": [],
+          "categories": [],
+          "uuid": "aa3a83fc-3fac-454d-9a1b-569518b6410c",
+          "response": [
+            "3b962ab2-69e7-46a6-b1b2-505bdc55b8c0"
+          ],
+          "responded": true,
+        },
+        {
+          "type": "section",
+          "title": "Important health questions",
+          "items": [
+            {
+              "uuid": "95714687-1a46-49dc-8195-82732fe4c3c7",
+              "title": "Do you exercise enough?",
+              "type": "question",
+              "response_type": "list",
+              "required": false,
+              "params": {
+                "response_set": "7c45d26f-ebe6-49e4-8c1c-15b2aeac5185",
+                "multiple_selection": false
+              },
+              "check_conditions_for": [],
+              "categories": [],
+              "response": [
+                "60bef5f8-966c-4cf9-8816-bac28fc78036"
+              ],
+              "responded": true,
+            },
+            {
+              "type": "question",
+              "title": "Do you drink enough water?",
+              "required": false,
+              "response_type": "list",
+              "params": {
+                "response_set": "7c45d26f-ebe6-49e4-8c1c-15b2aeac5185",
+                "multiple_selection": false
+              },
+              "check_conditions_for": [],
+              "categories": [],
+              "uuid": "9a54c058-ed48-464b-8c1d-dcdd6e7e8abf",
+              "response": [
+                "49a38d9b-c100-4a7e-9d65-c47f0f6dc18e"
+              ],
+              "responded": true,
+            },
+            {
+              "type": "section",
+              "title": "Even more important questions",
+              "items": [
+                {
+                  "uuid": "25f9e5b5-b3bb-49a6-8703-1d7844a2ec21",
+                  "title": "What do you like to drink?",
+                  "type": "question",
+                  "response_type": "list",
+                  "required": false,
+                  "params": {
+                    "response_set": "974a8b26-5489-48bb-883f-ade9013ed3fc",
+                    "multiple_selection": true
+                  },
+                  "check_conditions_for": [],
+                  "categories": [],
+                  "response": [
+                    "f97795d0-ff3a-453b-ab90-a8129766d56b",
+                    "29813f25-288d-49e8-b612-345b89f0b965"
+                  ],
+                  "responded": true,
+                },
+                {
+                  "type": "question",
+                  "title": "What do you like to eat?",
+                  "required": false,
+                  "response_type": "list",
+                  "params": {
+                    "response_set": "dabe5fe7-081b-4dbe-b9de-208b8d83ed4d",
+                    "multiple_selection": true
+                  },
+                  "check_conditions_for": [],
+                  "categories": [],
+                  "uuid": "4260d646-f56f-4116-9035-f9a47d986695",
+                  "response": [
+                    "71d2b5c7-c68b-41cc-abf1-85944732f928",
+                    "be1d5fa1-b819-4ef4-924d-7492fe7c4b7a"
+                  ],
+                  "responded": true,
+                }
+              ],
+              "required": false,
+              "weight": "2",
+              "repeat": false,
+              "uuid": "3ec21fa3-632e-4b96-a8a6-926482eebdcf"
+            }
+          ],
+          "required": false,
+          "weight": "3",
+          "repeat": false,
+          "uuid": "44cecd88-4205-4d66-aea4-708bf905ba75"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "title": "Safety",
+      "items": [
+        {
+          "uuid": "5cfe19c4-b103-4509-93f8-a9e2f9a2e2f9",
+          "title": "Do you feel safe?",
+          "type": "question",
+          "response_type": "list",
+          "required": false,
+          "params": {
+            "response_set": "f15d9667-6dbd-4596-bf39-e08cc19d43ee",
+            "multiple_selection": false
+          },
+          "check_conditions_for": [],
+          "categories": [],
+          "response": [
+            "80b8b450-2e6a-4c23-9e8d-6fed16553f20"
+          ],
+          "responded": true,
+        }
+      ],
+      "uuid": "381ea2a5-fb82-4dcb-9d8d-ca92114b868b"
+    }
+  ],
+  "params": {
+    "response_sets": [
+      {
+        "uuid": "7c45d26f-ebe6-49e4-8c1c-15b2aeac5185",
+        "responses": [
+          {
+            "uuid": "60bef5f8-966c-4cf9-8816-bac28fc78036",
+            "title": "Yes",
+            "color": "#4AD862",
+            "score": 1,
+            "negative": false
+          },
+          {
+            "uuid": "3b962ab2-69e7-46a6-b1b2-505bdc55b8c0",
+            "title": "No",
+            "color": "#FF6E44",
+            "score": 0,
+            "negative": true
+          },
+          {
+            "uuid": "49a38d9b-c100-4a7e-9d65-c47f0f6dc18e",
+            "title": "N/A",
+            "color": "#777777",
+            "score": null,
+            "negative": false
+          }
+        ]
+      },
+      {
+        "uuid": "be8e7526-9c61-480b-b9eb-81440cc54f67",
+        "responses": [
+          {
+            "uuid": "52670ade-a6a7-410f-94ea-9482b235a45d",
+            "title": "Intact",
+            "color": "#4AD862",
+            "score": 1,
+            "negative": false
+          },
+          {
+            "uuid": "e321d662-83f8-4b47-ae27-1b3a24bb3d56",
+            "title": "Defect",
+            "color": "#FF6E44",
+            "score": 0,
+            "negative": true
+          },
+          {
+            "uuid": "feba21a0-c9d7-448a-a8cc-bb1a6996485a",
+            "title": "N/A",
+            "color": "#777777",
+            "score": null,
+            "negative": false
+          }
+        ]
+      },
+      {
+        "uuid": "0caa8e39-d70c-4e7a-80b1-3a5c9b5d345d",
+        "responses": [
+          {
+            "uuid": "af897582-9e72-4976-ba59-cb8cd0039854",
+            "title": "Good",
+            "color": "#4AD862",
+            "score": 2,
+            "negative": false
+          },
+          {
+            "uuid": "b86af13c-17b8-419f-a0de-307db9a84572",
+            "title": "Medium",
+            "color": "#FDAC43",
+            "score": 1,
+            "negative": false
+          },
+          {
+            "uuid": "016f2b5f-7219-480b-8730-5cf912d0d9da",
+            "title": "Bad",
+            "color": "#FF6E44",
+            "score": 0,
+            "negative": true
+          },
+          {
+            "uuid": "617c60f4-fcdf-4575-8a59-2e0d5b1a1f11",
+            "title": "N/A",
+            "color": "#777777",
+            "score": null,
+            "negative": false
+          }
+        ]
+      },
+      {
+        "uuid": "974a8b26-5489-48bb-883f-ade9013ed3fc",
+        "responses": [
+          {
+            "title": "Water",
+            "color": "#777777",
+            "score": "2",
+            "negative": false,
+            "uuid": "f97795d0-ff3a-453b-ab90-a8129766d56b"
+          },
+          {
+            "title": "Coke",
+            "color": "#777777",
+            "score": "3",
+            "negative": false,
+            "uuid": "29813f25-288d-49e8-b612-345b89f0b965"
+          },
+          {
+            "title": "Beer",
+            "color": "#777777",
+            "score": "1",
+            "negative": false,
+            "uuid": "f149e2b3-29ca-455e-b5c1-97a64873db54"
+          }
+        ]
+      },
+      {
+        "uuid": "dabe5fe7-081b-4dbe-b9de-208b8d83ed4d",
+        "responses": [
+          {
+            "title": "Pizza",
+            "color": "#777777",
+            "score": "5",
+            "negative": false,
+            "uuid": "3bdfc92e-80c2-423a-ac52-ed8067e52655"
+          },
+          {
+            "title": "Salad",
+            "color": "#777777",
+            "score": "10",
+            "negative": false,
+            "uuid": "71d2b5c7-c68b-41cc-abf1-85944732f928"
+          },
+          {
+            "title": "I never eat",
+            "color": "#777777",
+            "score": null,
+            "negative": false,
+            "uuid": "be1d5fa1-b819-4ef4-924d-7492fe7c4b7a"
+          }
+        ]
+      },
+      {
+        "uuid": "f15d9667-6dbd-4596-bf39-e08cc19d43ee",
+        "responses": [
+          {
+            "title": "Sure",
+            "color": "#777777",
+            "score": "10",
+            "negative": false,
+            "uuid": "4f1f2b61-8002-4186-8408-344e8958f818"
+          },
+          {
+            "title": "Not really",
+            "color": "#777777",
+            "score": "5",
+            "negative": false,
+            "uuid": "307a2135-db5b-4cd6-bcd0-e95069895da5"
+          },
+          {
+            "title": "Absolutely not",
+            "color": "#777777",
+            "score": "0",
+            "negative": false,
+            "uuid": "80b8b450-2e6a-4c23-9e8d-6fed16553f20"
+          }
+        ]
+      }
+    ]
+  }
+}
