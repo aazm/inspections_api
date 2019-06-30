@@ -53,9 +53,18 @@ class InspectionService
     {
         $total = 0;
         $actual = 0;
+
         foreach ($this->items as $item) {
+
             $total += $item->total();
             $actual += $item->actual();
+
+
+            print_r($item);
+        }
+
+        if(!$total) {
+            return [0,0,0];
         }
 
         return [$actual, $total, round($actual / $total * 100, 0)];
@@ -114,5 +123,5 @@ class InspectionService
             }
         }
     }
-    
+
 }

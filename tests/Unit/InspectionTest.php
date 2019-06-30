@@ -63,5 +63,21 @@ class InspectionTest extends TestCase
         $this->assertEquals([95, 192, 49], $result);
 
     }
+    public function testInspectPayload2ResultMatch()
+    {
+        return;
+        if(!file_exists(__DIR__.'/../stubs/payload.2.json')) {
+            throw new \RuntimeException('Test payload is missing');
+        }
+
+        $this->payload = file_get_contents(__DIR__.'/../stubs/payload.2.json');
+
+        $service = new InspectionService();
+        $this->assertTrue($service->fill($this->payload));
+
+        $result = $service->inspect();
+        $this->assertEquals([102, 102, 100], $result);
+
+    }
 
 }

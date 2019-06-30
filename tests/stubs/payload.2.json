@@ -22,7 +22,7 @@
           "response": [
             "617c60f4-fcdf-4575-8a59-2e0d5b1a1f11"
           ],
-          "responded": true,
+          "responded": true
         },
         {
           "type": "question",
@@ -39,7 +39,7 @@
           "response": [
             "49a38d9b-c100-4a7e-9d65-c47f0f6dc18e"
           ],
-          "responded": true,
+          "responded": true
         },
         {
           "type": "section",
@@ -60,7 +60,7 @@
               "response": [
                 "60bef5f8-966c-4cf9-8816-bac28fc78036"
               ],
-              "responded": true,
+              "responded": true
             },
             {
               "type": "question",
@@ -77,7 +77,7 @@
               "response": [
                 "60bef5f8-966c-4cf9-8816-bac28fc78036"
               ],
-              "responded": true,
+              "responded": true
             },
             {
               "type": "section",
@@ -100,7 +100,7 @@
                     "29813f25-288d-49e8-b612-345b89f0b965",
                     "f149e2b3-29ca-455e-b5c1-97a64873db54"
                   ],
-                  "responded": true,
+                  "responded": true
                 },
                 {
                   "type": "question",
@@ -117,7 +117,7 @@
                   "response": [
                     "be1d5fa1-b819-4ef4-924d-7492fe7c4b7a"
                   ],
-                  "responded": true,
+                  "responded": true
                 }
               ],
               "required": false,
@@ -152,7 +152,7 @@
           "response": [
             "4f1f2b61-8002-4186-8408-344e8958f818"
           ],
-          "responded": true,
+          "responded": true
         }
       ],
       "uuid": "381ea2a5-fb82-4dcb-9d8d-ca92114b868b"
@@ -325,16 +325,4 @@
       }
     ]
   }
-}
-
-
-
-{
-  "type": "section",
-  "title": "Important health questions",
-  "required": false,
-  "weight": "3",
-  "repeat": false,
-  "uuid": "44cecd88-4205-4d66-aea4-708bf905ba75"
-
 }

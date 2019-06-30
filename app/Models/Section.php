@@ -24,7 +24,7 @@ class Section extends Element implements Containable
     {
         $this->params = $params;
         $this->items = collect();
-        $this->weight = $params['weight'] ?? 1;
+        $this->weight = isset($params['weight']) ? intval($params['weight']) : 1;
     }
 
     public function add(Scoreable $obj): void
