@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Contracts\Scoreable;
 use Illuminate\Support\Collection;
 
-class Question implements Scoreable
+class Question extends Element
 {
     /** @var array $params */
     private $params;

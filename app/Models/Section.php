@@ -9,11 +9,11 @@
 
 namespace App\Models;
 
-use App\Contracts\Containable;
 use App\Contracts\Scoreable;
+use App\Contracts\Containable;
 use Illuminate\Support\Collection;
 
-class Section implements Scoreable, Containable
+class Section extends Element implements Containable
 {
     /** @var Collection  */
     private $items;

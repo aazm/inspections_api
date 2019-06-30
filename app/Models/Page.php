@@ -9,11 +9,11 @@
 
 namespace App\Models;
 
-use App\Contracts\Containable;
 use App\Contracts\Scoreable;
+use App\Contracts\Containable;
 use Illuminate\Support\Collection;
 
-class Page implements Scoreable, Containable
+class Page extends Element implements Containable
 {
     /** @var array $params */
     private $params;
