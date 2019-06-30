@@ -19,6 +19,6 @@ abstract class Element implements Scoreable
 
     public static function create(string $type, array $params): Scoreable
     {
-
+        return new Question($params[0], $params[1]);
     }
 }
