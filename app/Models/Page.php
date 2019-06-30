@@ -15,8 +15,6 @@ use Illuminate\Support\Collection;
 
 class Page extends Element implements Containable
 {
-    /** @var array $params */
-    private $params;
     /** @var Collection $items */
     private $items;
 

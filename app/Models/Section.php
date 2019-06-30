@@ -17,8 +17,6 @@ class Section extends Element implements Containable
 {
     /** @var Collection  */
     private $items;
-    /** @var array $params */
-    private $params;
     /** @var double $weight */
     private $weight;
 

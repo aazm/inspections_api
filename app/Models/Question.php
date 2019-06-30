@@ -6,8 +6,6 @@ use Illuminate\Support\Collection;
 
 class Question extends Element
 {
-    /** @var array $params */
-    private $params;
     /** @var Collection $answers */
     private $answers;
     /** @var Collection $selected */

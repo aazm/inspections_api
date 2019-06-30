@@ -23,5 +23,12 @@ interface Scoreable
      * @return float
      */
     public function actual(): float;
+
+    /**
+     * Returns data witch was given in constructor
+     *
+     * @return array
+     */
+    public function toArray(): array;
 }
 

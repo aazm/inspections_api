@@ -16,9 +16,22 @@ abstract class Element implements Scoreable
     private const SECTION = 'page';
     private const QUESTION = 'page';
 
+    /** @var array $params */
+    protected $params;
+
 
     public static function create(string $type, array $params): Scoreable
     {
         return new Question($params[0], $params[1]);
+    }
+
+    /**
+     * Object given properties.
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->params;
     }
 }

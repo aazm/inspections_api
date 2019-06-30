@@ -12,12 +12,19 @@ use App\Contracts\Scoreable;
 
 class InspectionService
 {
-    public static function factory(): Scoreable
+    private $items;
+
+    public function __construct()
+    {
+        $this->items = collect();
+    }
+
+    public function fill(array $data)
     {
 
     }
 
-    public static function create(): self
+    public function process(): array
     {
 
     }
