@@ -48,6 +48,18 @@ class InspectionService
         return true;
     }
 
+    public function inspect(): array
+    {
+        $total = 0;
+        $actual = 0;
+        foreach ($this->items as $item) {
+            $total += $item->total();
+            $actual += $item->actual();
+        }
+
+        return [$actual, $total, round($actual / $total * 100, 0)];
+    }
+
     private function prepareResponseSet(array $arr): Collection
     {
         $collection = collect();
@@ -85,13 +97,15 @@ class InspectionService
 
         do {
 
-            foreach ($items as $item) {
+            for($i = 0; $i < count($items); $i++) {
+
+                $item = $items[$i];
 
                 $element = Element::create($item['type'], Arr::except($item, 'items'), $responses);
 
                 if ($element instanceof Containable) {
 
-                    $stack->push([$root, $items]);
+                    $stack->push([$root, $items, $i]);
                     $root = $element;
                     $items = $item['items'];
 
@@ -101,7 +115,7 @@ class InspectionService
                 }
 
                 if(!$stack->isEmpty()) {
-                    [$root, $items] = $stack->pop();
+                    [$root, $items, $i] = $stack->pop();
                 }
             }
 

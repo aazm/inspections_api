@@ -52,6 +52,15 @@ class InspectionTest extends TestCase
 
         $items = $service->getItems();
         $this->assertEquals(2, $items->count());
+    }
+
+    public function testInspectPayload1ResultMatch()
+    {
+        $service = new InspectionService();
+        $service->fill($this->payload);
+
+        $result = $service->inspect();
+        $this->assertEquals([95, 192, 49], $result);
 
     }
 
