@@ -15,6 +15,7 @@ use App\Models\Element;
 use App\Models\Page;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 
 class InspectionService
 {
@@ -93,32 +94,25 @@ class InspectionService
     private function processPage(Page $page, array $items, Collection $responses)
     {
         $stack = new \SplStack();
-        $root = $page;
 
-        do {
+        $stack->push([$page, $items]);
+
+        while (!$stack->isEmpty()) {
+
+            [$root, $items] = $stack->pop();
 
             for($i = 0; $i < count($items); $i++) {
 
                 $item = $items[$i];
-
                 $element = Element::create($item['type'], Arr::except($item, 'items'), $responses);
 
-                if ($element instanceof Containable) {
+                $root->add($element);
 
-                    $stack->push([$root, $items, $i]);
-                    $root = $element;
-                    $items = $item['items'];
-
-
-                } else {
-                    $root->add($element);
-                }
-
-                if(!$stack->isEmpty()) {
-                    [$root, $items, $i] = $stack->pop();
+                if($element instanceof Containable) {
+                    $stack->push([$element, $item['items']]);
                 }
             }
-
-        } while (!$stack->isEmpty());
+        }
     }
+    
 }
