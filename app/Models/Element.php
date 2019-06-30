@@ -22,21 +22,23 @@ abstract class Element implements Scoreable
 
 
     /**
-     * Basic factory method for Scoreable Objects.s
+     * Basic factory method for Scoreable Objects.
      *
      * @param string $type
      * @param array $params
+     * @param Collection|null $responses
      * @return Scoreable
      */
-    public static function create(string $type, array $params, Collection $responses = null): Scoreable
+    public static function create(string $type, array $params, Collection $responses): Scoreable
     {
         switch ($type) {
-            case self::QUESTION:
-                return new Question($params[0], $params[1]);
             case self::PAGE:
                 return new Page($params);
             case self::SECTION:
                 return new Section($params);
+            case self::QUESTION:
+
+                return new Question($params, $responses->get($params['params']['response_set']));
             default:
                 throw new \RuntimeException("unable to instantiate unknown class: {$type}");
         }

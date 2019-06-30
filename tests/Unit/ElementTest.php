@@ -15,7 +15,11 @@ class ElementTest extends TestCase
     public function testCreateQuestionRetunrsQuestionObject()
     {
         [$data, $answers] = $this->createQuestionData();
-        $question = Element::create($data['type'], [$data, $answers]);
+
+        $collection = collect();
+        $collection->put($data['params']['response_set'], $answers);
+
+        $question = Element::create($data['type'], $data, $collection);
 
         $this->assertInstanceOf(Question::class, $question);
     }
@@ -23,13 +27,13 @@ class ElementTest extends TestCase
     public function testCreateThrowsExceptionIfClassIsUnknown()
     {
         $this->expectException(\RuntimeException::class);
-        Element::create($this->faker->sentence(1), []);
+        Element::create($this->faker->sentence(1), [], collect());
     }
 
     public function testCreatePageReturnsPageObject()
     {
         $data = $this->createSimplePage()->toArray();
-        $page = Element::create($data['type'], $data);
+        $page = Element::create($data['type'], $data, collect());
 
         $this->assertInstanceOf(Page::class, $page);
     }
@@ -37,7 +41,7 @@ class ElementTest extends TestCase
     public function testCreateSectionReturnsSectionObject()
     {
         $data = $this->createSimpleSection()->toArray();
-        $page = Element::create($data['type'], $data);
+        $page = Element::create($data['type'], $data, collect());
 
         $this->assertInstanceOf(Section::class, $page);
 

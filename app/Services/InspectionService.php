@@ -8,9 +8,12 @@
 
 namespace App\Services;
 
+use App\Contracts\Containable;
 use App\Contracts\Scoreable;
 use App\Models\Answer;
 use App\Models\Element;
+use App\Models\Page;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class InspectionService
@@ -33,17 +36,13 @@ class InspectionService
 
     public function fill(string $json): bool
     {
-        if($this->filled) throw new \RuntimeException('Object was already filled');
+        if ($this->filled) throw new \RuntimeException('Object was already filled');
 
         $data = \json_decode($json, true);
-        if(0 !== \json_last_error()) return false;
+        if (0 !== \json_last_error()) return false;
 
 
-        $this->process(
-            $data,
-            $this->prepareResponseSet($data['params']['response_sets'])
-        );
-
+        $this->process($data, $this->prepareResponseSet($data['params']['response_sets']));
 
         $this->filled = true;
         return true;
@@ -58,7 +57,7 @@ class InspectionService
             ['uuid' => $uuid, 'responses' => $responses] = $set;
             $collection->put($uuid, collect());
 
-            foreach($responses as $response) {
+            foreach ($responses as $response) {
                 $collection->get($uuid)->add(new Answer($response));
             }
         }
@@ -66,21 +65,46 @@ class InspectionService
         return $collection;
     }
 
-
     private function process(array $data, Collection $responses)
     {
-        foreach ($data['items'] as $page) {
+        $pages = $data['items'] ?? [];
 
-            $elem = Element::create($page['type'], $page, $responses);
-            $this->items->add($elem);
+        foreach ($pages as $page) {
+
+            $element = Element::create($page['type'], Arr::except($page, 'items'), $responses);
+            $this->items->push($element);
+
+            $this->processPage($element, $page['items'], $responses);
         }
-
     }
 
-
-    public function results(): array
+    private function processPage(Page $page, array $items, Collection $responses)
     {
+        $stack = new \SplStack();
+        $root = $page;
 
+        do {
+
+            foreach ($items as $item) {
+
+                $element = Element::create($item['type'], Arr::except($item, 'items'), $responses);
+
+                if ($element instanceof Containable) {
+
+                    $stack->push([$root, $items]);
+                    $root = $element;
+                    $items = $item['items'];
+
+
+                } else {
+                    $root->add($element);
+                }
+
+                if(!$stack->isEmpty()) {
+                    [$root, $items] = $stack->pop();
+                }
+            }
+
+        } while (!$stack->isEmpty());
     }
-
 }
